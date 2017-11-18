@@ -1,5 +1,5 @@
 {
-    "name": "dersam/multitenant",
+    "name": "dersam/laravel-multitenant",
     "description": "Multitenant service provider for laravel",
     "keywords": ["laravel","multitenant"],
     "license": "MIT",
