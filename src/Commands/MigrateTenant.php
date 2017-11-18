@@ -46,6 +46,10 @@ class MigrateTenant extends Command
     {
         $tenants = Tenant::all();
 
+        if ($tenants->count() === 0) {
+            $this->error('No tenants found in tenant table.');
+        }
+
         foreach ($tenants as $tenant) {
             $this->tenantSwitcher->switchGlobalTenant($tenant);
 
