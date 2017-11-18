@@ -49,6 +49,11 @@ class MigrateTenantRollback extends Command
 
         foreach ($tenants as $tenant) {
             $this->tenantSwitcher->switchGlobalTenant($tenant);
+
+            $database = Config::get('database.connections.tenant.database');
+            $message = "Rolling back {$tenant->name} [{$database}]";
+            $this->info($message);
+
             $this->call('migrate:rollback', [
                 '--path' => 'database/migrations/tenant',
                 '--database' => 'tenant'

@@ -5,6 +5,7 @@ namespace Dersam\Multitenant\Commands;
 use Dersam\Multitenant\Tenant;
 use Dersam\Multitenant\TenantSwitcher;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 
 class MigrateTenant extends Command
 {
@@ -52,6 +53,10 @@ class MigrateTenant extends Command
 
         foreach ($tenants as $tenant) {
             $this->tenantSwitcher->switchGlobalTenant($tenant);
+
+            $database = Config::get('database.connections.tenant.database');
+            $message = "Migrating {$tenant->name} [{$database}]";
+            $this->info($message);
 
             $this->call('migrate', [
                 '--path' => 'database/migrations/tenant',
