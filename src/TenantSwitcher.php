@@ -4,6 +4,7 @@ namespace Dersam\Multitenant;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
 class TenantSwitcher
@@ -27,6 +28,11 @@ class TenantSwitcher
         if (is_null($config)) {
             throw new InvalidArgumentException("Database connection [tenant] is not available.");
         }
+
+        // Obliterate any lingering reference to this connection.
+        // Laravel caches db configs and connections, so we have to do this
+        // to ensure we can replace it properly.
+        DB::purge('tenant');
 
         Config::set('database.connections.tenant.database', 'tenant_' . $tenant->id);
     }
