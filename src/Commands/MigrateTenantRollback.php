@@ -6,6 +6,7 @@ namespace Dersam\Multitenant\Commands;
 use Dersam\Multitenant\Tenant;
 use Dersam\Multitenant\TenantSwitcher;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 
 class MigrateTenantRollback extends Command
 {
