@@ -3,5 +3,25 @@
     "description": "Multitenant service provider for laravel",
     "keywords": ["laravel","multitenant"],
     "license": "MIT",
-    "type": "library"
+    "type": "library",
+    "authors": [
+        {"name": "Samuel Schmidt", "email": "samuel@dersam.net"}
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/framework": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dersam\\Multitenant\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dersam\\Multitenant\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
 }
