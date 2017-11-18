@@ -20,7 +20,7 @@ class MigrateTenant extends Command
      *
      * @var string
      */
-    protected $description = 'Run migrations for a specific tenant.';
+    protected $description = 'Run all tenant migrations.';
     /**
      * @var TenantSwitcher
      */
