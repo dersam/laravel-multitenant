@@ -81,4 +81,5 @@ You can specify migrations that are run only on tenant databases by placing them
 the `database/migrations/tenant` directory. Migrations can be run on all tenants
 with `php artisan multitenant:migrate` and rolled back with
  `php artisan multitenant:migrate:rollback`. These commands will read the `tenants` table
- and automatically discover the relevant tenant databases.
+ and automatically discover the relevant tenant databases. Each tenant maintains its
+ own migration table.
