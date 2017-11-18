@@ -5,6 +5,7 @@ namespace Dersam\Multitenant\Commands;
 use Dersam\Multitenant\Tenant;
 use Dersam\Multitenant\TenantSwitcher;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Config;
 
 class MigrateTenant extends Command
@@ -58,10 +59,14 @@ class MigrateTenant extends Command
             $message = "Migrating {$tenant->name} [{$database}]";
             $this->info($message);
 
-            $this->call('migrate', [
-                '--path' => 'database/migrations/tenant',
-                '--database' => 'tenant'
-            ]);
+            try {
+                $this->call('migrate', [
+                    '--path' => 'database/migrations/tenant',
+                    '--database' => 'tenant'
+                ]);
+            } catch (QueryException $e) {
+                $this->error("[{$database}] is not a valid database schema. Skipping.");
+            }
         }
     }
 }
