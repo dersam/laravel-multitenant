@@ -62,7 +62,8 @@ class MigrateTenantRollback extends Command
                     '--database' => 'tenant'
                 ]);
             } catch (QueryException $e) {
-                $this->error("[{$database}] is not a valid database schema. Skipping.");
+                $this->error("Error migrating [{$database}] Skipping.");
+                $this->error($e->getMessage());
             }
         }
     }
